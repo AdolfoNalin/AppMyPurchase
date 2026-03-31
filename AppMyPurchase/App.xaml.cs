@@ -1,10 +1,25 @@
-﻿using AppMyPurchase.Views;
-using Microsoft.Extensions.DependencyInjection;
+﻿using AppMyPurchase.FactoryConnection;
+using AppMyPurchase.Views;
 
 namespace AppMyPurchase
 {
     public partial class App : Application
     {
+        private static ConnectSqLiteDatabase _database;
+        public static ConnectSqLiteDatabase Database
+        {
+            get
+            {
+                if (_database == null)
+                {
+                    string path = Path
+                        .Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "_dbMyPurchase_Local.db3");
+                    _database = new ConnectSqLiteDatabase(path);
+                }
+
+                return _database;
+            }
+        }
         public App()
         {
             InitializeComponent();
