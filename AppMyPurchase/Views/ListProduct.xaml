@@ -4,6 +4,7 @@
              x:Class="AppMyPurchase.Views.ListProduct"
              NavigationPage.HasNavigationBar="False">
     <VerticalStackLayout>
-
+        <Label 
+            Text="Texto"/>
     </VerticalStackLayout>
 </ContentPage>
