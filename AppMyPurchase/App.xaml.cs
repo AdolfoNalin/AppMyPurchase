@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using AppMyPurchase.Views;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AppMyPurchase
 {
@@ -7,6 +8,7 @@ namespace AppMyPurchase
         public App()
         {
             InitializeComponent();
+            MainPage = new NavigationPage(new ListProduct());
         }
 
         protected override Window CreateWindow(IActivationState? activationState)
