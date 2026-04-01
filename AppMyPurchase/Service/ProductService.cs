@@ -5,11 +5,12 @@ namespace AppMyPurchase.Service
 {
     public class ProductService
     {
-        private readonly SQLiteAsyncConnection _connect;
+        private SQLiteAsyncConnection _connect;
 
-        public ProductService(SQLiteAsyncConnection connection)
+        public ProductService(string path)
         {
-            _connect = connection;
+            _connect = new SQLiteAsyncConnection(path);
+            _connect.CreateTableAsync<Product>().Wait();
         }
 
         #region Insert
