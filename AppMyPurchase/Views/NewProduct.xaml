@@ -2,11 +2,33 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppMyPurchase.Views.NewProduct"
-             Title="NewProduct">
-    <VerticalStackLayout>
+             Title="Novo Produto">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Salvar"
+            Clicked="ToolbarItem_Clicked_Save"/>
+    </ContentPage.ToolbarItems>
+    
+    <VerticalStackLayout
+        Spacing="10"
+        Margin="10">
         <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            Text="Descrição do Produto:" />
+        <Entry
+            x:Name="txtDescription"/>
+
+        <Label 
+            Text="Quantidade:" />
+        <Entry
+            x:Name="txtAmount"
+            Keyboard="Numeric"/>
+
+        <Label 
+            Text="Preço:" />
+        <Entry 
+            x:Name="txtPrice"
+            Keyboard="Numeric"/>
+
+
     </VerticalStackLayout>
 </ContentPage>

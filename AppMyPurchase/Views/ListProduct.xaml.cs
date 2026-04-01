@@ -6,4 +6,23 @@ public partial class ListProduct : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    #region ToolbarItem_Clicked
+	/// <summary>
+	/// /
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
+    private void ToolbarItem_Clicked(object sender, EventArgs e)
+    {
+		try
+		{
+			Navigation.PushAsync(new NewProduct());
+		}
+		catch (Exception ex)
+		{
+			DisplayAlert("Erro", $"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}", "Fechar");
+		}
+    }
+    #endregion
 }
