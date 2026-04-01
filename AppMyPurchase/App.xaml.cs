@@ -1,12 +1,16 @@
-﻿using AppMyPurchase.FactoryConnection;
+﻿using AppMyPurchase.Service;
 using AppMyPurchase.Views;
+using SQLite;
 
 namespace AppMyPurchase
 {
     public partial class App : Application
     {
-        private static ConnectSqLiteDatabase _database;
-        public static ConnectSqLiteDatabase Database
+        private readonly SQLiteAsyncConnection _connect;
+
+        private static ProductService _database;
+
+        public static ProductService Database
         {
             get
             {
@@ -14,12 +18,13 @@ namespace AppMyPurchase
                 {
                     string path = Path
                         .Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "_dbMyPurchase_Local.db3");
-                    _database = new ConnectSqLiteDatabase(path);
+                    _database = new ProductService(path);
                 }
 
                 return _database;
             }
         }
+
         public App()
         {
             InitializeComponent();
