@@ -23,10 +23,12 @@ public partial class NewProduct : ContentPage
 			};
 
 			if (product is null)
-				throw new ArgumentNullException("Produto pre fcisa conter Descrição, Quantidade e Priço!");
+				throw new ArgumentNullException("Produto precisa conter Descrição, Quantidade e Priço!");
 
 			await App.Database.Insert(product);
 			DisplayAlert("Sucesso!", "Produto cadastrado com sucesso", "Fechar");
+
+			Navigation.PopAsync();
 		}
 		catch(ArgumentNullException ane)
 		{
