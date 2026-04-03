@@ -40,9 +40,9 @@ namespace AppMyPurchase.Service
         {
             try
             {
-                string sql = $"UPDATE Product SET description={product.Description}, amount={product.Amount} price={product.Price} WHERE id={product.Id}";
-
-                return await _connect.QueryAsync<Product>(sql);
+                await _connect.UpdateAsync(product);
+                List<Product> list = await _connect.Table<Product>().ToListAsync();
+                return list;
             }
             catch (Exception)
             {
@@ -98,7 +98,7 @@ namespace AppMyPurchase.Service
         {
             try
             {
-                List<Product> products = await _connect.Table<Product>().Where(p => p.Description == value).ToListAsync();
+                List<Product> products = await _connect.Table<Product>().Where(p => p.Description.ToUpper().Contains(value.ToUpper())).ToListAsync();
                 return products;
             }
             catch (Exception)
