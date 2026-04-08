@@ -18,8 +18,7 @@ public partial class ListProduct : ContentPage
         try
         {
             List<Product> tmp = await App.Database.GetAll();
-            tmp.ForEach(product => products.Add(product));
-        }
+            tmp.ForEach(product => products.Add(product));        }
         catch (Exception ex)
         {
             DisplayAlert("Erro", $"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}", "Fechar");
@@ -54,6 +53,8 @@ public partial class ListProduct : ContentPage
         {
             string value = e.NewTextValue;
 
+            lstProduct.IsRefreshing = true;
+
             List<Product> tmp = new List<Product>();
             products.Clear();
 
@@ -76,7 +77,10 @@ public partial class ListProduct : ContentPage
 
             throw;
         }
-
+        finally
+        {
+            lstProduct.IsRefreshing = false;
+        }
     }
     #endregion
 
@@ -154,6 +158,26 @@ public partial class ListProduct : ContentPage
         catch (Exception ex)
         {
             DisplayAlert("Erro", $"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}", "Fechar");
+        }
+    }
+    #endregion
+
+    #region lstProduct_Refreshing
+    private async void lstProduct_Refreshing(object sender, EventArgs e)
+    {
+        try
+        {
+            products.Clear();
+            List<Product> tmp = await App.Database.GetAll();
+            tmp.ForEach(product => products.Add(product));
+        }
+        catch (Exception ex)
+        {
+            DisplayAlert("Erro", $"{ex.Message}, {ex.StackTrace}, {ex.HelpLink}", "Fechar");
+        }
+        finally
+        {
+            lstProduct.IsRefreshing = false;
         }
     }
     #endregion
